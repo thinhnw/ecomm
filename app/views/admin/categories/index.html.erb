@@ -15,6 +15,8 @@
             <thead class="bg-white border-b">
               <tr>
                 <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-800">
+                </th>
+                <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-800">
                   Name
                 </th>
                 <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-800">
@@ -25,6 +27,9 @@
             <tbody>
               <% @admin_categories.each do |c| %>
                 <tr class="border-b bg-gray-50">
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800 underline whitespace-nowrap">
+                    <%= c.image.present? ? image_tag(c.image.variant(:thumb)) : image_tag("https://placehold.co/50") %>
+                  </td>
                   <td class="px-6 py-4 text-sm font-medium text-gray-800 underline whitespace-nowrap">
                     <%= link_to c.name, edit_admin_category_path(c) %>
                   </td>

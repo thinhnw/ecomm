@@ -2,13 +2,15 @@ class Admin::StocksController < AdminController
   before_action :set_admin_stock, only: %i[ show edit update destroy ]
 
   def index
-    @admin_stocks = Stock.all
+    @product = Product.find(params[:product_id])
+    @admin_stocks = @product.stocks
   end
 
   def show
   end
 
   def new
+    @product = Product.find(params[:product_id])
     @admin_stock = Stock.new
   end
 
@@ -16,13 +18,14 @@ class Admin::StocksController < AdminController
   end
 
   def create
+    @product = Product.find(params[:product_id])
     @admin_stock = Stock.new(admin_stock_params)
 
-    @admin_stock.product = Product.find(params[:product_id])
+    @admin_stock.product = @product
 
     respond_to do |format|
       if @admin_stock.save
-        format.html { redirect_to [ :admin, @admin_stock.product, @admin_stock ], notice: "Stock was successfully created." }
+        format.html { redirect_to [ :admin, @product, @admin_stock ], notice: "Stock was successfully created." }
         format.json { render :show, status: :created, location: @admin_stock }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -60,6 +63,6 @@ class Admin::StocksController < AdminController
 
     # Only allow a list of trusted parameters through.
     def admin_stock_params
-      params.require(:stock).permit(:product_id, :amount, :size)
+      params.require(:stock).permit(:amount, :size)
     end
 end

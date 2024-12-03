@@ -1,0 +1,13 @@
+<div class="flex w-full mx-auto md:w-2/3">
+  <div class="mx-auto">
+    <% if notice.present? %>
+      <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
+    <% end %>
+    <%= render @admin_product %>
+    <%= link_to "Edit this product", edit_admin_product_path(@admin_product), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Back to products", admin_products_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class="inline-block ml-2">
+      <%= button_to "Destroy this product", [:admin, @admin_product], method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    </div>
+  </div>
+</div>

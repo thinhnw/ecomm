@@ -25,7 +25,7 @@ class Admin::OrdersController < AdminController
 
     respond_to do |format|
       if @admin_order.save
-        format.html { redirect_to @admin_order, notice: "Order was successfully created." }
+        format.html { redirect_to [ :admin, @admin_order ], notice: "Order was successfully created." }
         format.json { render :show, status: :created, location: @admin_order }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class Admin::OrdersController < AdminController
   def update
     respond_to do |format|
       if @admin_order.update(admin_order_params)
-        format.html { redirect_to @admin_order, notice: "Order was successfully updated." }
+        format.html { redirect_to [ :admin, @admin_order ], notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @admin_order }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +65,6 @@ class Admin::OrdersController < AdminController
 
     # Only allow a list of trusted parameters through.
     def admin_order_params
-      params.require(:admin_order).permit(:customer_email, :fulfilled, :total, :address)
+      params.require(:order).permit(:customer_email, :fulfilled, :total, :address)
     end
 end

@@ -15,6 +15,8 @@ class Admin::StocksController < AdminController
   end
 
   def edit
+    @product = Product.find(params[:product_id])
+    @admin_stock = Stock.find(params[:id])
   end
 
   def create

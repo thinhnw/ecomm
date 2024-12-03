@@ -7,6 +7,7 @@
     <h1 class="text-4xl font-bold">Orders</h1>
     <%= link_to "New order", new_admin_order_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
+  <h2>Unfulfilled Orders</h2>
   <div class="flex flex-col w-full">
     <div class="overflow-x-auto sm:mx-0 5 lg:mx-0">
       <div class="inline-block min-w-full py-2">
@@ -29,7 +30,52 @@
               </tr>
             </thead>
             <tbody>
-              <% @admin_orders.each do |o| %>
+              <% @not_fulfilled_orders.each do |o| %>
+                <tr class="border-b bg-gray-50">
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800 underline whitespace-nowrap">
+                    <%= link_to o.id, [:admin, o], class: "underline" %>
+                  </td>
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                    <%= o.customer_email %>
+                  </td>
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                    <%= o.address%>
+                  </td>
+                  <td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                    <%= o.total %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2>Fulfilled Orders</h2>
+  <div class="flex flex-col w-full">
+    <div class="overflow-x-auto sm:mx-0 5 lg:mx-0">
+      <div class="inline-block min-w-full py-2">
+        <div class="overflow-x-auto">
+          <table class="min-w-full overflow-x-scroll">
+            <thead class="bg-white border-b">
+              <tr>
+                <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-800">
+                  Order ID
+                </th>
+                <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-800">
+                  Customer Email
+                </th>
+                <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-800">
+                  Address
+                </th>
+                <th scope="col" class="px-6 py-4 text-sm font-medium text-left text-gray-800">
+                  Total
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @fulfilled_orders.each do |o| %>
                 <tr class="border-b bg-gray-50">
                   <td class="px-6 py-4 text-sm font-medium text-gray-800 underline whitespace-nowrap">
                     <%= link_to o.id, [:admin, o], class: "underline" %>
